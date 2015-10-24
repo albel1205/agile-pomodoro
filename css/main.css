@@ -108,3 +108,7 @@ li.border-left-green{
 .maxtrix-box-min-height{
   height: 270px;
 }
+
+.vertical-text-left{
+  -webkit-transform: rotate(90deg);
+}
