@@ -4,11 +4,11 @@ html,body{
 
 .full-height{
 	min-height: 100%;
-    height: 100%;
+  height: 100%;
 }
 
 .full-width{
-	width: 100%;
+	width: 100% !important;
 }
 
 .vertical-middle{
@@ -135,4 +135,10 @@ li.border-left-green{
 
 .bg-perform-color{
   background-color: #92D051;
+}
+
+.border-right{
+  border-width: 0px 1px 0px 0px;
+  border-color: black;
+  border-style: solid;
 }
