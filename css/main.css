@@ -109,6 +109,30 @@ li.border-left-green{
   height: 270px;
 }
 
+.matrix-box-half{
+  height: 135px;
+}
+
 .vertical-text-left{
-  -webkit-transform: rotate(90deg);
+  -webkit-transform: rotate(270deg);
+  min-width: 115px;
+}
+.horizontal-text-bottom{
+  text-align: center;
+}
+
+.bg-skip-color{
+  background-color: #FE0000;
+}
+
+.bg-transfer-color{
+  background-color: #FFC000;
+}
+
+.bg-optimize-color{
+  background-color: #01B0F1;
+}
+
+.bg-perform-color{
+  background-color: #92D051;
 }
