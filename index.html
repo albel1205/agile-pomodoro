@@ -18,113 +18,118 @@
 	<body>
 		<div class="main-content full-height">
 			<div id="week-goal" class="container-fluid full-height" ng-controller="WeekGoal.WeekGoalController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
-				<div class="row" style="margin-top:30%;">
+				<div class="row" style="margin-top:25%;">
 					<div class="col-md-1"></div>
 					<div class="col-md-9" style="padding-top:12px;">
 						<input class="form-control empty" placeholder="What would you like to archive this week" type="text">
 					</div>
 					<div class="col-md-2">
-						<button class="btn btn-sub btn-primary btn-raised" data-ng-click="go()">
-							<span class="mdi-content-send"> GO </span>
+						<button class="btn btn-sub btn-primary btn-raised mdi-content-send" data-ng-click="go()">
+							<span> GO </span>
 						</button>
 					</div>
 				</div>
 			</div>
 			
-			<div id="activity-inventory" class="container-fluid full-height" ng-controller="Inventory.InventoryController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
+			<div id="activity-inventory" class="container-fluid full-height" ng-controller="Inventory.InventoryController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}" style="padding-top:56px;">
 				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-8" style="padding-top:12px;">
-						<input class="form-control empty" placeholder="Enter your task description" type="text">
+					<div class="col-md-1" style="margin-top:4%;">
+						<div class="big-bold-text">Skip</div>
 					</div>
-					<div class="col-md-2">
-						<button class="btn btn-sub btn-primary btn-raised" data-ng-click="go()">
-							Add task
+					<div class="col-md-10" style="padding-right:5px;">
+						<div class="shadow-z-1 matrix-box-half bg-skip-color"></div>
+					</div>
+					<div class="col-md-1 matrix-box-half">
+						<button class="btn btn-primary btn-fab btn-raised mdi-content-add" style="margin-top:100%;">
 						</button>
 					</div>
 				</div>
 				<div class="row">
-					<div id="wrapper">
-						<div id="sidebar-wrapper" class="box-right">
-							<ul class="sidebar-nav">
-								<li class="border-left-green"><p>Another link</p></li>
-								<li class="border-left-green"><p>Next link</p></li>
-								<li class="border-left-green"><p>Last link</p></li>
-							</ul>
-						</div><hr>
-						<div id="page-content-wrapper">
-							<div class="page-content">
-								<div class="container">
-									<div class="row">
-										<div class="col-md-1" style="margin-top:3%;">
-											<div class="vertical-text-left">Skip</div>
-										</div>
-										<div class="col-md-10 no-gutter" style="padding-right:5px;padding-bottom:5px;">
-											<div class="shadow-z-1 matrix-box-half bg-danger"></div>
-										</div>
-										<div class="col-md-1"></div>
-									</div>
-									<div class="row">
-										<div class="col-md-1" style="margin-top:3%;">
-											<div class="vertical-text-left">Transfer</div>
-										</div>
-										<div class="col-md-10 no-gutter" style="padding-right:5px;padding-bottom:5px;">
-											<div class="shadow-z-1 matrix-box-half bg-warning"></div>
-										</div>
-										<div class="col-md-1"></div>
-									</div>
-									<div class="row">
-										<div class="col-md-1" style="margin-top:3%;">
-											<div class="vertical-text-left">Optimize</div>
-										</div>
-										<div class="col-md-10 no-gutter" style="padding-right:5px;padding-bottom:5px;">
-											<div class="shadow-z-1 matrix-box-half bg-info"></div>
-										</div>
-										<div class="col-md-1"></div>
-									</div>
-									<div class="row">
-										<div class="col-md-1" style="margin-top:3%;">
-											<div class="vertical-text-left">Perform</div>
-										</div>
-										<div class="col-md-10 no-gutter" style="padding-right:5px;padding-bottom:5px;">
-											<div class="shadow-z-1 matrix-box-half bg-success"></div>
-										</div>
-										<div class="col-md-1"></div>
-									</div>
-								</div>
-							</div>
-						</div>
+					<div class="col-md-1" style="margin-top:4%;">
+						<div class="big-bold-text">Transfer</div>
+					</div>
+					<div class="col-md-10" style="padding-right:5px;">
+						<div class="shadow-z-1 matrix-box-half bg-transfer-color"></div>
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-primary btn-fab btn-raised  mdi-content-add" style="margin-top:100%;">
+						</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1" style="margin-top:4%;">
+						<div class="big-bold-text">Optimize</div>
+					</div>
+					<div class="col-md-10" style="padding-right:5px;">
+						<div class="shadow-z-1 matrix-box-half bg-optimize-color"></div>
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-primary btn-fab btn-raised  mdi-content-add" style="margin-top:100%;">
+						</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1" style="margin-top:4%;">
+						<div class="big-bold-text">Perform</div>
+					</div>
+					<div class="col-md-10" style="padding-right:5px;">
+						<div class="shadow-z-1 matrix-box-half bg-perform-color"></div>
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-primary btn-fab btn-raised  mdi-content-add" style="margin-top:100%;">
+						</button>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-2 pull-right no-gutter">
-						<button class="btn btn-primary btn-raised btn-md pull-right" data-ng-click="goToToDoPage()">
+						<button class="btn btn-primary btn-raised btn-md pull-right" data-ng-click="goToToDoPage()" style="margin-top:56px;margin-right:16px;">
 							<span>To-do page</span>
 						</button>
 					</div>
 				</div>
 			</div>
 			
-			<div id="today-todos" class="container-fluid full-height" ng-controller="ToDos.ToDoController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
-				<div class="row full-height">
-					<div class="col-md-3 full-height box-right">
-						<ul class="sidebar-nav full-width">
-							<li class="border-left-green"><p>Another link</p></li>
-							<li class="border-left-green"><p>Next link</p></li>
-							<li class="border-left-green"><p>Last link</p></li>
-							<li class="border-left-green"><p>Another link</p></li>
-							<li class="border-left-green"><p>Next link</p></li>
-							<li class="border-left-green"><p>Last link</p></li>
-							<li class="border-left-green"><p>Another link</p></li>
-							<li class="border-left-green"><p>Next link</p></li>
-							<li class="border-left-green"><p>Last link</p></li>
-							<li class="border-left-green"><p>Another link</p></li>
-							<li class="border-left-green"><p>Next link</p></li>
-							<li class="border-left-green"><p>Last link</p></li>
-						</ul>
+			<div id="today-todos" class="container-fluid full-height" ng-controller="ToDos.ToDoController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}" style="padding-top:32px;">
+				<div class="row">
+					<div class="col-md-4" style="padding-left:2px;padding-right:2px;">
+						<div class="title-container shadow-z-1">
+							<span class="big-bold-text">Activity Inventory</span>
+						</div>
 					</div>
-					<div class="col-md-6 full-height box-right"></div>
-					<div class="col-md-3 full-height"></div>
+					<div class="col-md-4"  style="padding-left:2px;padding-right:2px;">
+						<div class="title-container shadow-z-1">
+							<span class="big-bold-text">Today Todos</span>
+						</div>
+					</div>
+					<div class="col-md-4"  style="padding-left:2px;padding-right:2px;">
+						<div class="title-container shadow-z-1">
+							<span class="big-bold-text">Urgent & Unscheduled</span>
+						</div>
+					</div>
+				</div>
+				<div class="row full-height" style="min-height:0px;height:80%;">
+					<div class="col-md-4 full-height" style="padding-left:2px;padding-right:2px;padding-top:2px;">
+						<div class="content-container shadow-z-1">
+							
+						</div>
+					</div>
+					<div class="col-md-4 full-height"  style="padding-left:2px;padding-right:2px;padding-top:2px;">
+						<div class="content-container shadow-z-1">
+							
+						</div>
+					</div>
+					<div class="col-md-4 full-height"  style="padding-left:2px;padding-right:2px;padding-top:2px;">
+						<div class="content-container shadow-z-1">
+							
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2 pull-left no-gutter">
+						<button class="btn btn-primary btn-raised btn-md pull-left" style="margin-top:32px;margin-left:16px;">
+							<span>Back</span>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
