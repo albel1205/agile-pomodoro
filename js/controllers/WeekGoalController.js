@@ -1,4 +1,4 @@
-function WeekGoalController($scope, pageService){	
+function WeekGoalController($scope, pageService, dbService){	
 	$scope.go = function(){
 		pageService.setCurrentPageId(2);
 	};

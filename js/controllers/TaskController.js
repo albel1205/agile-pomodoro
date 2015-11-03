@@ -1,4 +1,4 @@
-function ToDoController($scope, pageService){	
+function TaskController($scope, pageService, dbService){	
 	$scope.isCurrentPage = function(){
 		return pageService.getCurrentPageId() == 3;
 	}

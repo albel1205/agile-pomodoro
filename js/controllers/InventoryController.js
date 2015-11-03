@@ -1,4 +1,4 @@
-function InventoryController($scope, pageService){
+function InventoryController($scope, pageService, dbService){
 	$scope.isCurrentPage = function(){
 		return pageService.getCurrentPageId() == 2;
 	};
