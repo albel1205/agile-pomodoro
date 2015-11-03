@@ -6,4 +6,8 @@ function InventoryController($scope, pageService){
 	$scope.goToToDoPage = function(){
 		pageService.setCurrentPageId(3);
 	};
+	
+	$scope.backToWeekGoal = function(){
+		pageService.setCurrentPageId(1);
+	}
 }

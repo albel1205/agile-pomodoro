@@ -17,7 +17,7 @@
 	</head>
 	<body>
 		<div class="main-content full-height">
-			<div id="week-goal" class="container-fluid full-height" ng-controller="WeekGoal.WeekGoalController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
+			<div id="week-goal" class="container-fluid full-height" ng-controller="WeekGoalController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
 				<div class="row" style="margin-top:25%;">
 					<div class="col-md-1"></div>
 					<div class="col-md-9" style="padding-top:12px;">
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			
-			<div id="activity-inventory" class="container-fluid full-height" ng-controller="Inventory.InventoryController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}" style="padding-top:56px;">
+			<div id="activity-inventory" class="container-fluid full-height" ng-controller="InventoryController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}" style="padding-top:56px;">
 				<div class="row">
 					<div class="col-md-1" style="margin-top:4%;">
 						<div class="big-bold-text">Skip</div>
@@ -81,6 +81,11 @@
 					</div>
 				</div>
 				<div class="row">
+					<div class="col-md-2 pull-left no-gutter">
+						<button class="btn btn-primary btn-raised btn-md pull-left" data-ng-click="backToWeekGoal()" style="margin-top:56px;margin-left:16px;">
+							<span>Back</span>
+						</button>
+					</div>
 					<div class="col-md-2 pull-right no-gutter">
 						<button class="btn btn-primary btn-raised btn-md pull-right" data-ng-click="goToToDoPage()" style="margin-top:56px;margin-right:16px;">
 							<span>To-do page</span>
@@ -89,7 +94,7 @@
 				</div>
 			</div>
 			
-			<div id="today-todos" class="container-fluid full-height" ng-controller="ToDos.ToDoController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}" style="padding-top:32px;">
+			<div id="today-todos" class="container-fluid full-height" ng-controller="ToDoController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}" style="padding-top:32px;">
 				<div class="row">
 					<div class="col-md-4" style="padding-left:2px;padding-right:2px;">
 						<div class="title-container shadow-z-1">
@@ -126,7 +131,8 @@
 				</div>
 				<div class="row">
 					<div class="col-md-2 pull-left no-gutter">
-						<button class="btn btn-primary btn-raised btn-md pull-left" style="margin-top:32px;margin-left:16px;">
+						<button class="btn btn-primary btn-raised btn-md pull-left" style="margin-top:32px;margin-left:16px;"
+						ng-click="backToInventory()">
 							<span>Back</span>
 						</button>
 					</div>
@@ -143,14 +149,11 @@
 		<script type="text/javascript" src="js/material.min.js"></script>
 		<script type="text/javascript" src="js/ripples.min.js"></script>
 		<script type="text/javascript" src="js/global.js"></script>
-		<script type="text/javascript" src="modules/shared/shared.service.js"></script>
-		<script type="text/javascript" src="modules/shared/shared.module.js"></script>
-		<script type="text/javascript" src="modules/weekgoal/weekgoal.ctrl.js"></script>
-		<script type="text/javascript" src="modules/weekgoal/weekgoal.module.js"></script>
-		<script type="text/javascript" src="modules/todos/todos.ctrl.js"></script>
-		<script type="text/javascript" src="modules/todos/todos.module.js"></script>
-		<script type="text/javascript" src="modules/inventory/inventory.ctrl.js"></script>
-		<script type="text/javascript" src="modules/inventory/inventory.module.js"></script>
+		<script type="text/javascript" src="js/controllers/WeekGoalController.js"></script>
+		<script type="text/javascript" src="js/controllers/InventoryController.js"></script>
+		<script type="text/javascript" src="js/controllers/TodoController.js"></script>
+		<script type="text/javascript" src="js/shared/shared.service.js"></script>
+		<script type="text/javascript" src="js/shared/shared.module.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		
 	</body>
