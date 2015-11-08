@@ -1,0 +1,3 @@
+function PackageInventory(){
+	this.tasks = [];
+}

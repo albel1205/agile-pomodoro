@@ -4,11 +4,11 @@ html,body{
 
 .full-height{
 	min-height: 100%;
-    height: 100%;
+  height: 100%;
 }
 
 .full-width{
-	width: 100%;
+	width: 100% !important;
 }
 
 .vertical-middle{
@@ -107,4 +107,61 @@ li.border-left-green{
 
 .maxtrix-box-min-height{
   height: 270px;
+}
+
+.matrix-box-half{
+  height: 135px;
+}
+
+.vertical-text-left{
+  -webkit-transform: rotate(270deg);
+  min-width: 115px;
+}
+.horizontal-text-bottom{
+  text-align: center;
+}
+
+.bg-skip-color{
+  background-color: #FF6666;
+}
+
+.bg-transfer-color{
+  background-color: #FFFF66;
+}
+
+.bg-optimize-color{
+  background-color: #3333FF;
+}
+
+.bg-perform-color{
+  background-color: #33CC00;
+}
+
+.border-right{
+  border-width: 0px 1px 0px 0px;
+  border-color: black;
+  border-style: solid;
+}
+
+.big-bold-text{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.btn-addTask-small{
+  height: 40px;
+  width: 40px;
+}
+.title-container{
+  height: 50px;
+  border: 1px solid #CCC;
+  text-align: center;
+  padding:8px;
+}
+
+.content-container{
+  height: 100%;
+  border: 1px solid #CCC;
+  text-align: center;
+  padding:8px;
 }

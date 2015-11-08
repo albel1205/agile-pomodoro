@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="ADPomodoroApp" ng-csp="">
+<html ng-app="AgilePomodoroApp" ng-csp="">
 	<head>
 		<meta charset="utf-8" />
 		<title>Activity Inventory</title>
 		
 		<!-- Mobile support -->
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<!--bootstrap libs-->
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -17,103 +17,183 @@
 	</head>
 	<body>
 		<div class="main-content full-height">
-			<div id="week-goal" class="container-fluid full-height" ng-controller="WeekGoal.WeekGoalController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
-				<div class="row" style="margin-top:30%;">
+			<div id="week-goal" class="container-fluid full-height"
+			  ng-controller="WeekGoalController"
+			  ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
+				<div class="row" style="margin-top:25%;">
 					<div class="col-md-1"></div>
 					<div class="col-md-9" style="padding-top:12px;">
-						<input class="form-control empty" placeholder="What would you like to archive this week" type="text">
+						<input class="form-control empty"
+						  placeholder="What would you like to archive this week"
+						  type="text">
 					</div>
 					<div class="col-md-2">
-						<button class="btn btn-sub btn-primary btn-raised" data-ng-click="go()">
-							<span class="mdi-content-send"> GO </span>
+						<button class="btn btn-sub btn-primary btn-raised mdi-content-send"
+						  data-ng-click="go()">
+							<span> GO </span>
 						</button>
 					</div>
 				</div>
 			</div>
 			
-			<div id="activity-inventory" class="container-fluid full-height" ng-controller="Inventory.InventoryController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
+			<div id="activity-inventory" class="container-fluid full-height"
+			  ng-controller="InventoryController"
+			  ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}"
+			  style="padding-top:56px;">
 				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-8" style="padding-top:12px;">
-						<input class="form-control empty" placeholder="Enter your task description" type="text">
+					<div class="col-md-1" style="margin-top:4%;">
+						<div class="big-bold-text">Skip</div>
 					</div>
-					<div class="col-md-2">
-						<button class="btn btn-sub btn-primary btn-raised" data-ng-click="go()">
-							Add task
+					<div class="col-md-10" style="padding-right:5px;">
+						<div class="shadow-z-1 matrix-box-half bg-skip-color"></div>
+					</div>
+					<div class="col-md-1 matrix-box-half">
+						<button class="btn btn-primary btn-fab btn-raised mdi-content-add"
+						  style="margin-top:100%;">
 						</button>
 					</div>
 				</div>
-				<div class="row" style="margin-top:16px;">
-					<div id="wrapper">
-						<div id="sidebar-wrapper" class="box-right">
-							<ul class="sidebar-nav">
-								<li class="border-left-green"><p>Another link</p></li>
-								<li class="border-left-green"><p>Next link</p></li>
-								<li class="border-left-green"><p>Last link</p></li>
-							</ul>
-						</div><hr>
-						<div id="page-content-wrapper">
-							<div class="page-content">
-								<div class="container">
-									<div class="row">
-										<div class="col-md-1">
-											<div class="">1</div>
-										</div>
-										<div class="col-md-4 no-gutter" style="padding-right:5px;padding-bottom:5px;">
-											<div class="shadow-z-1 maxtrix-box-min-height"></div>
-										</div>
-										<div class="col-md-4 no-gutter">
-											<div class="shadow-z-1 maxtrix-box-min-height"></div>
-										</div>
-										<div class="col-md-3"></div>
-									</div>
-									<div class="row">
-										<div class="col-md-1">
-											<div class="">1</div>
-										</div>
-										<div class="col-md-4 no-gutter" style="padding-right:5px;">
-											<div class="shadow-z-1 maxtrix-box-min-height"></div>
-										</div>
-										<div class="col-md-4 no-gutter">
-											<div class="shadow-z-1 maxtrix-box-min-height"></div>
-										</div>
-										<div class="col-md-3"></div>
-									</div>
-									<div class="row">
-										
-									</div>
-								</div>
-							</div>
+				<div class="row">
+					<div class="col-md-1" style="margin-top:4%;">
+						<div class="big-bold-text">Transfer</div>
+					</div>
+					<div class="col-md-10" style="padding-right:5px;">
+						<div class="shadow-z-1 matrix-box-half bg-transfer-color"></div>
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-primary btn-fab btn-raised  mdi-content-add"
+						  style="margin-top:100%;">
+						</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1" style="margin-top:4%;">
+						<div class="big-bold-text">Optimize</div>
+					</div>
+					<div class="col-md-10" style="padding-right:5px;">
+						<div class="shadow-z-1 matrix-box-half bg-optimize-color"></div>
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-primary btn-fab btn-raised  mdi-content-add"
+						  style="margin-top:100%;">
+						</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1" style="margin-top:4%;">
+						<div class="big-bold-text">Perform</div>
+					</div>
+					<div class="col-md-10" style="padding-right:5px;">
+						<div class="shadow-z-1 matrix-box-half bg-perform-color"></div>
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-primary btn-fab btn-raised  mdi-content-add"
+						  style="margin-top:100%;">
+						</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2 pull-left no-gutter">
+						<button class="btn btn-primary btn-raised btn-md pull-left"
+						  data-ng-click="backToWeekGoal()"
+						  style="margin-top:56px;margin-left:16px;">
+							<span>Back</span>
+						</button>
+					</div>
+					<div class="col-md-2 pull-right no-gutter">
+						<button class="btn btn-primary btn-raised btn-md pull-right"
+						  data-ng-click="goToToDoPage()"
+						  style="margin-top:56px;margin-right:16px;">
+							<span>To-do page</span>
+						</button>
+					</div>
+				</div>
+			</div>
+			
+			<div id="today-todos" class="container-fluid full-height"
+			  ng-controller="TaskController"
+			  ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}"
+			  style="padding-top:32px;">
+				<div class="row">
+					<div class="col-md-4" style="padding-left:2px;padding-right:2px;">
+						<div class="title-container shadow-z-1">
+							<span class="big-bold-text">Activity Inventory</span>
+						</div>
+					</div>
+					<div class="col-md-4"  style="padding-left:2px;padding-right:2px;">
+						<div class="title-container shadow-z-1">
+							<span class="big-bold-text">Today Todos</span>
+						</div>
+					</div>
+					<div class="col-md-4"  style="padding-left:2px;padding-right:2px;">
+						<div class="title-container shadow-z-1">
+							<span class="big-bold-text">Urgent & Unscheduled</span>
 						</div>
 					</div>
 				</div>
-			</div>
-			
-			<div id="today-todos" class="container-fluid full-height" ng-controller="ToDos.ToDoController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
+				<div class="row full-height" style="min-height:0px;height:80%;">
+					<div class="col-md-4 full-height"
+					  style="padding-left:2px;padding-right:2px;padding-top:2px;">
+						<div class="content-container shadow-z-1">
+							
+						</div>
+					</div>
+					<div class="col-md-4 full-height"
+					  style="padding-left:2px;padding-right:2px;padding-top:2px;">
+						<div class="content-container shadow-z-1">
+							
+						</div>
+					</div>
+					<div class="col-md-4 full-height"
+					  style="padding-left:2px;padding-right:2px;padding-top:2px;">
+						<div class="content-container shadow-z-1">
+							
+						</div>
+					</div>
+				</div>
 				<div class="row">
-					
+					<div class="col-md-2 pull-left no-gutter">
+						<button class="btn btn-primary btn-raised btn-md pull-left"
+						  style="margin-top:32px;margin-left:16px;"
+						ng-click="backToInventory()">
+							<span>Back</span>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
 		
 		<!--jquery 2.x - does not support Internet Explorer 6, 7, or 8-->
-		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript" src="js/angular-1.4.7.min.js"></script>
-		<script type="text/javascript" src="js/angular-route-1.4.7.min.js"></script>
-		<script type="text/javascript" src="js/angular-animate-1.4.7.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/material.min.js"></script>
-		<script type="text/javascript" src="js/ripples.min.js"></script>
-		<script type="text/javascript" src="js/global.js"></script>
-		<script type="text/javascript" src="modules/shared/shared.service.js"></script>
-		<script type="text/javascript" src="modules/shared/shared.module.js"></script>
-		<script type="text/javascript" src="modules/weekgoal/weekgoal.ctrl.js"></script>
-		<script type="text/javascript" src="modules/weekgoal/weekgoal.module.js"></script>
-		<script type="text/javascript" src="modules/todos/todos.ctrl.js"></script>
-		<script type="text/javascript" src="modules/todos/todos.module.js"></script>
-		<script type="text/javascript" src="modules/inventory/inventory.ctrl.js"></script>
-		<script type="text/javascript" src="modules/inventory/inventory.module.js"></script>
-		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js">
+		</script>
+		<script type="text/javascript" src="js/angular-1.4.7.min.js">
+		</script>
+		<script type="text/javascript" src="js/angular-route-1.4.7.min.js">
+		</script>
+		<script type="text/javascript" src="js/angular-animate-1.4.7.min.js">
+		</script>
+		<script type="text/javascript" src="js/bootstrap.min.js">
+		</script>
+		<script type="text/javascript" src="js/material.min.js">
+		</script>
+		<script type="text/javascript" src="js/ripples.min.js">
+		</script>
+		<script type="text/javascript" src="js/global.js">
+		</script>
+		<script type="text/javascript" src="js/shared/shared.pageService.js">
+		</script>
+		<script type="text/javascript" src="js/shared/shared.dbService.js">
+		</script>
+		<script type="text/javascript" src="js/shared/shared.module.js">
+		</script>
+		<script type="text/javascript" src="js/controllers/WeekGoalController.js">
+		</script>
+		<script type="text/javascript" src="js/controllers/InventoryController.js">
+		</script>
+		<script type="text/javascript" src="js/controllers/TaskController.js">
+		</script>
+		<script type="text/javascript" src="js/app.js">
+		</script>
 		
 	</body>
 </html>

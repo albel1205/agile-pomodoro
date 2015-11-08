@@ -13,5 +13,9 @@
 		"background":{
 			"scripts":["js/background.js"]
 		}
-	}
+	},
+	"permissions":[
+		 "fileSystem",
+		 "syncFileSystem"
+	]
 }

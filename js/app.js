@@ -1,3 +1,7 @@
 $.material.init();//init the bootstrap material componenets
 
-var ADPomodoroApp = angular.module('ADPomodoroApp',['ngRoute','sharedApp', 'WeekGoal', 'Inventory', 'ToDos']); 
+var AgilePomodoroApp = angular.module('AgilePomodoroApp',['ngRoute','sharedApp']); 
+
+AgilePomodoroApp.controller('WeekGoalController',['$scope','pageService', 'dbService', WeekGoalController]);
+AgilePomodoroApp.controller('InventoryController',['$scope','pageService', 'dbService', InventoryController]);
+AgilePomodoroApp.controller('TaskController',['$scope','pageService', 'dbService', TaskController]);
