@@ -1,4 +1,6 @@
-function TaskController($scope, pageService, dbService){	
+function TaskController
+	($scope, pageService, dbService)
+{
 	$scope.isCurrentPage = function(){
 		return pageService.getCurrentPageId() == 3;
 	}

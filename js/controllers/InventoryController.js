@@ -1,4 +1,6 @@
-function InventoryController($scope, pageService, dbService){
+function InventoryController
+	(scope, pageService, dbService)
+{
 	$scope.isCurrentPage = function(){
 		return pageService.getCurrentPageId() == 2;
 	};
@@ -10,4 +12,5 @@ function InventoryController($scope, pageService, dbService){
 	$scope.backToWeekGoal = function(){
 		pageService.setCurrentPageId(1);
 	}
+
 }

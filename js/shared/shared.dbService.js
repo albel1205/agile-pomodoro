@@ -1,13 +1,9 @@
-function dbService($rootScope,$window){
-	$window.rootScopes = $window.rootScopes || [];
-	$window.rootScopes.push($rootScope);
+function dbService($rootScope,$window)
+{
+	var service = {};
 	
-	$window.dbService = {
-		testing: function(){
-			return true;
-		}
-	}
-	
-	return $window.dbService;
+	return service;
 }
+
+
 

@@ -1,0 +1,3 @@
+function PackageUrgent(){
+	this.tasks = [];
+}
