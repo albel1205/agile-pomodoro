@@ -1,6 +1,12 @@
 function WeekGoalController
-	($scope, pageService, dbService)
+	($scope, pageService, dbService, openDbService)
 {
+	$scope.init = function(){
+		dbService.openDb().then(function(result){
+			console.log(result);
+		});	
+	};
+	
 	$scope.go = function(){
 		pageService.setCurrentPageId(2);
 	};
