@@ -1,4 +1,4 @@
-function weekGoal(){
+function WeekGoal(){
 	this.packageInventory = [];
 	this.packageTodo = [];
 	this.packageUrgent = [];

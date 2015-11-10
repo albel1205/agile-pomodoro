@@ -1,6 +1,6 @@
-function InterruptionInternal(){
+function InterruptionExternal(){
 
 }
 
-InterruptionInternal.prototype = Object.create(Interruption.prototype);
-InterruptionInternal.prototype.constructor = InterruptionInternal;
+InterruptionExternal.prototype = Object.create(Interruption.prototype);
+InterruptionExternal.prototype.constructor = InterruptionExternal;
