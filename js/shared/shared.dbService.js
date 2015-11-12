@@ -16,67 +16,156 @@ var interruptionTypes = {
 	external: 2
 }
 
+//
+// Note: each request will create a separated connection to the indexeddb database
+//
 function dbService($q, $rootScope)
 {
 	var database = null;
 	
 	var service = {
-		openDb: openDb,
 		addGoal:addGoal,
 		addTask: addTask,
-		updateTaskKind:updateTaskKind,
-		updateTaskPomodoro:updateTaskPomodoro,
+		updateTask:updateTask,
 		getAllActivities:getAllActivities,
 		getAllTodoActivities: getAllTodoActivities,
 		getAllUrgentActivities:getAllUrgentActivities,
 		assignTaskToTodo: assignTaskToTodo,
-		addInternalInterrup:addInternalInterrup,
-		addExternalInterrup:addExternalInterrup
+		addInterruption:addInterruption
 	};
 	
-	function addGoal(){
-		
+	function addGoal(goal){
+		var deffered = $q.defer();
+		openDb(function(){
+			database.goal.add(goal).then(function(item){
+				database.close();//close the database
+				deffered.resolve(item.id);
+			});
+		});
+		return deffered.promise;
 	};
 	
-	function addTask(){
-		
+	function addTask(task){
+		var deffered = $q.defer();
+		openDb(function(){
+			database.task.add(task).then(function(item){
+				database.close();//close the database
+				deffered.resolve(item.id);
+			});
+		});
+		return deffered.promise;
 	};
 	
-	function updateTaskKind(){
-		
-	};
-	
-	function updateTaskPomodoro(){
-		
+	function updateTask(task){
+		var deffered = $q.defer();
+		openDb(function(){
+			database.task.update(task).then(function(item){
+				database.close();//close the database
+				deffered.resolve(item.id);
+			});
+		});
+		return deffered.promise;
 	};
 	
 	function getAllActivities(){
-		
+		var deffered = $q.defer();
+		openDb(function(){
+			database.taskContainer
+			.query()
+			.filter(function(){
+				return taskContainer.containerType == taskContainerTypes.ActivityInventory;
+			})
+			.execute()
+			.then(function(results){
+				var containerId = (results[0]).id;
+				database.task.query().filter(function(){
+					return task.containerId == containerId;
+				}).execute().then(function(tasks){
+					database.close();
+					deffered.resolve(results);	
+				});
+			});
+		});
+		return deffered.promise;
 	};
 	
 	function getAllTodoActivities(){
-		
+		var deffered = $q.defer();
+		openDb(function(){
+			database.taskContainer
+			.query()
+			.filter(function(){
+				return taskContainer.containerType == taskContainerTypes.Todo;
+			})
+			.execute()
+			.then(function(results){
+				var containerId = (results[0]).id;
+				database.task.query().filter(function(){
+					return task.containerId == containerId;
+				}).execute().then(function(tasks){
+					database.close();
+					deffered.resolve(results);	
+				});
+			});
+		});
+		return deffered.promise;
 	};
 	
 	function getAllUrgentActivities(){
-		
+		var deffered = $q.defer();
+		openDb(function(){
+			database.taskContainer
+			.query()
+			.filter(function(){
+				return taskContainer.containerType == taskContainerTypes.Urgent;
+			})
+			.execute()
+			.then(function(results){
+				var containerId = (results[0]).id;
+				database.task.query().filter(function(){
+					return task.containerId == containerId;
+				}).execute().then(function(tasks){
+					database.close();//close the database
+					deffered.resolve(results);	
+				});
+			});
+		});
+		return deffered.promise;
 	};
 	
-	function assignTaskToTodo(){
-		
+	function assignTaskToTodo(task){
+		var deffered = $q.defer();
+		openDb(function(){
+			database.taskContainer
+			.query()
+			.filter(function(){
+				return taskContainer.containerType == taskContainerTypes.Todo;
+			})
+			.execute()
+			.then(function(results){
+				var containerId = (results[0]).id;
+				task.containerId = containerId;
+				database.task.update(task).then(function(item){
+					database.close();//close the database
+					deffered.resolve(item.id);
+				});
+			});
+		});
+		return deffered.promise;
 	};
 	
-	function addInternalInterrup(){
-		
-	};
+	function addInterruption(interruption){
+		var deffered = $q.defer();
+		openDb(function(){
+			database.interruption.add(interruption).then(function(item){
+				database.close();//close the database
+				deffered.resolve(item.id);
+			});
+		});
+		return deffered.promise;
+	}
 	
-	function addExternalInterrup(){
-		
-	};
-	
-	function openDb(){
-		var deferred = $q.defer();
-	
+	function openDb(callback){
 		db.open({
 			server:'agile-pomodoro',
 			version:1,
@@ -119,11 +208,9 @@ function dbService($q, $rootScope)
 			}
 		}).then(function(result){
 			database = result;
-			deferred.resolve(database);
+			callback();
 		});
-		
-		return deferred.promise;
-	};
+	}
 	
 	return service;
 }
