@@ -24,9 +24,11 @@
 				<div class="row" style="margin-top:25%;">
 					<div class="col-md-1"></div>
 					<div class="col-md-9" style="padding-top:12px;">
-						<input class="form-control empty"
-						  placeholder="What would you like to archive this week"
-						  type="text">
+						<input class="form-control empty" 
+							ng-model="weekGoal" 
+							ng-class="{'ng-invalid': (weekGoal == ''), '':(weekGoal != '')}"
+							placeholder="What would you like to archive this week"
+							type="text">
 					</div>
 					<div class="col-md-2">
 						<button class="btn btn-sub btn-primary btn-raised mdi-content-send"
@@ -38,9 +40,9 @@
 			</div>
 			
 			<div id="activity-inventory" class="container-fluid full-height"
-			  ng-controller="InventoryController"
-			  ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}"
-			  style="padding-top:56px;">
+				ng-controller="InventoryController"
+				ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}"
+				style="padding-top:56px;">
 				<div class="row">
 					<div class="col-md-1" style="margin-top:4%;">
 						<div class="big-bold-text">Skip</div>
@@ -50,8 +52,25 @@
 					</div>
 					<div class="col-md-1 matrix-box-half">
 						<button class="btn btn-primary btn-fab btn-raised mdi-content-add"
-						  style="margin-top:100%;">
+						  style="margin-top:100%;"
+						  data-ng-click="openTaskPopup()">
 						</button>
+					</div>
+				</div>
+				<div modal="showModal" close="closeTaskPopup()" class="modal" style="display:none;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4>Add new task</h4>
+							</div>
+							<div class="modal-body">
+								<p>Example paragraph with some text.</p>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-primary" data-ng-click="addTask()">OK</button>
+								<button class="btn" data-ng-click="closeTaskPopup()" style="margin-top:0;">Cancel</button>
+							</div>	
+						</div>
 					</div>
 				</div>
 				<div class="row">
@@ -181,13 +200,15 @@
 		</script>
 		<script type="text/javascript" src="js/global.js">
 		</script>
+		<script type="text/javascript" src="js/angular-ui-bootstrap-modal.js">
+		</script>
+		<script type="text/javascript" src="js/moment.js">
+		</script>
 		<script type="text/javascript" src="js/db.js">
 		</script>
 		<script type="text/javascript" src="js/shared/shared.pageService.js">
 		</script>
 		<script type="text/javascript" src="js/shared/shared.dbService.js">
-		</script>
-		<script type="text/javascript" src="js/shared/openDbService.js">
 		</script>
 		<script type="text/javascript" src="js/shared/shared.module.js">
 		</script>

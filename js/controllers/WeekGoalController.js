@@ -1,14 +1,26 @@
 function WeekGoalController
-	($scope, pageService, dbService, openDbService)
+	($scope, pageService, dbService)
 {
+	$scope.weekGoal = '';
+	
 	$scope.init = function(){
-		dbService.openDb().then(function(result){
-			console.log(result);
-		});	
+		
 	};
 	
 	$scope.go = function(){
-		pageService.setCurrentPageId(2);
+		if($scope.weekGoal != ''){
+			var monday = moment().day("Monday");
+			var sunday = moment().day("Sunday");
+			
+			dbService.addGoal({
+				description: $scope.weekGoal,
+				fromDate: monday.toDate().toUTCString(),
+				toDate: sunday.toDate().toUTCString()
+			}).then(function(key){
+				console.log('goalId: ' + key);
+				pageService.setCurrentPageId(2);
+			});
+		}
 	};
 	
 	$scope.isCurrentPage = function(){

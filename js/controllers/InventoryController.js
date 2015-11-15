@@ -1,6 +1,36 @@
 function InventoryController
 	($scope, pageService, dbService)
 {
+	$scope.showModal = false;
+	
+	$scope.openTaskPopup = function(){
+		$scope.showModal = true;
+	};
+	
+	$scope.closeTaskPopup= function(){
+		$scope.showModal = false;
+	};
+	
+	$scope.addTask = function(){
+		$scope.showModal = false;
+	};
+	
+	$scope.addSkipTask = function(){
+		
+	};
+	
+	$scope.addTransferTask =function(){
+		
+	};
+	
+	$scope.addOptimizeTask = function(){
+		
+	};
+	
+	$scope.addPerformTask = function(){
+		
+	};
+	
 	$scope.isCurrentPage = function(){
 		return pageService.getCurrentPageId() == 2;
 	};
