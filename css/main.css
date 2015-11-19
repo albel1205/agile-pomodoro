@@ -173,3 +173,15 @@ li.border-left-green{
   box-shadow: none;
   transition-duration: .3s;
 }
+
+.thirsty{
+  width: 30%;
+}
+
+.fifty{
+  width:50%;
+}
+
+.eighty{
+  width:80%;
+}

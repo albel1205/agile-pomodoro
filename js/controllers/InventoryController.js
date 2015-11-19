@@ -2,6 +2,9 @@ function InventoryController
 	($scope, pageService, dbService)
 {
 	$scope.showModal = false;
+	$scope.taskDescription = '';
+	$scope.taskPomodoros = 0;
+	$scope.selectedTaskTypeVal = 1;
 	
 	$scope.openTaskPopup = function(){
 		$scope.showModal = true;
@@ -42,5 +45,7 @@ function InventoryController
 	$scope.backToWeekGoal = function(){
 		pageService.setCurrentPageId(1);
 	}
-
+	
+	
+	function create
 }

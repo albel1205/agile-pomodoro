@@ -5,13 +5,14 @@
 		<title>Activity Inventory</title>
 		
 		<!-- Mobile support -->
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<!--bootstrap libs-->
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/roboto.min.css" />
 		<link rel="stylesheet" href="css/material-fullpalette.min.css" />
 		<link rel="stylesheet" href="css/ripples.min.css" />
+		<link rel="stylesheet" href="css/jquery.dropdown.css" />
 		<link rel="stylesheet" href="css/main.css" />
 		<base target="_blank"/>
 	</head>
@@ -64,7 +65,33 @@
 								<h4>Add new task</h4>
 							</div>
 							<div class="modal-body">
-								<p>Example paragraph with some text.</p>
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-md-2" style="margin-top:8px;"><p>Description</p></div>
+										<div class="col-md-10">
+											<input type="text" class="form-control empty full-width" 
+											ng-model="taskDescription"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-2" style="margin-top:8px;"><p>Pomodoros</p></div>
+										<div class="col-md-10">
+											<input type="text" class="form-control empty thirsty" ng-pattern="/^\d+$/" 
+											ng-model="taskPomodoros"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-2" style="margin-top:8px;"><p>Task type</p></div>
+										<div class="col-md-10">
+											<select class="select" ng-model="selectedTaskTypeVal">
+												<option value="1">Skips</option>
+												<option value="2">Transfer</option>
+												<option value="3">Optimize</option>
+												<option value="4">Perform</option>
+											</select>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="modal-footer">
 								<button class="btn btn-primary" data-ng-click="addTask()">OK</button>
@@ -131,9 +158,9 @@
 			</div>
 			
 			<div id="today-todos" class="container-fluid full-height"
-			  ng-controller="TaskController"
-			  ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}"
-			  style="padding-top:32px;">
+				ng-controller="TaskController"
+				ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}"
+				style="padding-top:32px;">
 				<div class="row">
 					<div class="col-md-4" style="padding-left:2px;padding-right:2px;">
 						<div class="title-container shadow-z-1">
@@ -201,6 +228,8 @@
 		<script type="text/javascript" src="js/global.js">
 		</script>
 		<script type="text/javascript" src="js/angular-ui-bootstrap-modal.js">
+		</script>
+		<script type="text/javascript" src="js/jquery.dropdown.js">
 		</script>
 		<script type="text/javascript" src="js/moment.js">
 		</script>
