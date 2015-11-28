@@ -185,3 +185,29 @@ li.border-left-green{
 .eighty{
   width:80%;
 }
+
+.task-container{
+  height:71px;
+  width:209px;
+  background-color:whitesmoke;
+  padding:6px;
+}
+.task-header{
+  min-height: 24px;
+  margin-left: 4px;
+}
+.task-pomodoros{
+  
+}
+
+.padding{
+  padding:8px;
+}
+
+.mid-margin-right{
+  margin-right: 4px;
+}
+
+.content-container{
+  margin-top: 56px;
+}

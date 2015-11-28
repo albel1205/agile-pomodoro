@@ -25,17 +25,9 @@ function dbService($q, $rootScope)
 	
 	var service = {
 		addGoal:addGoal,
-		addTask: addTask,
-		updateTask:updateTask,
-		deleteTask:deleteTask,
-		getAllActivities:getAllActivities,
-		getAllTodoActivities: getAllTodoActivities,
-		getAllUrgentActivities:getAllUrgentActivities,
-		assignTaskToTodo: assignTaskToTodo,
-		addInterruption:addInterruption,
-		addPackageInventory: addPackageInventory,
-		addPackageTodo: addPackageTodo,
-		addPackageUrgent: addPackageUrgent
+		addTaskToContainer: addTaskToContainer,
+		getContainer: getContainer,
+		addTasks: addTasks
 	};
 	
 	function addGoal(goal){
@@ -72,13 +64,49 @@ function dbService($q, $rootScope)
 		});
 	}
 	
-	function addTask(task){
+	function addTasks(tasks){
 		var deffered = $q.defer();
-		addDbTask(task, function(newTask){
-			deffered.resolve(newTask.id);
+		addDbTask(tasks, function(response){
+			deffered.resolve(response);
 		});
 		return deffered.promise;
-	};
+	}
+	
+	function addTaskToContainer(tasks, taskContainerType, goalId){
+		var deffered = $q.defer();
+		getGoalContainerByType(goalId, taskContainerType, function(container){
+			addDbTask(tasks, function(response){
+				deffered.resolve(response);
+			});
+		});
+		
+		return deffered.promise;
+	}
+	
+	function getContainer(goalId, taskContainerType){
+		var deffered = $q.defer();
+		getGoalContainerByType(goalId, taskContainerType, function(container){
+			deffered.resolve(container);
+		});
+		
+		return deffered.promise;
+	}
+	
+	function getGoalContainerByType(goalId, containerType, callback){
+		openDb(function(db){
+			database = db;
+			database.taskContainer
+			.query()
+			.filter('containerType', containerType)
+			.filter('goalId', goalId)
+			.execute()
+			.then(function(results){
+				var container = (results[0]);
+				database.close();
+				callback(container);
+			});
+		});
+	}
 	
 	//private
 	function addDbTask(task, callback){

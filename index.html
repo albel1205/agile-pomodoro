@@ -18,6 +18,21 @@
 	</head>
 	<body>
 		<div class="main-content full-height">
+			<!--<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle"
+					style="display:block;margin-top:10px;">
+						<span class="icon-bar" style="width:32px;"></span>
+						<span class="icon-bar" style="width:32px;"></span>
+						<span class="icon-bar" style="width:32px;"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-text navbar-right" style="margin-right:16px;font-style:italic;">
+						<li><p>All tasks were saved</p></li>
+					</ul>
+				</div>
+			</nav>-->
 			<div id="week-goal" class="container-fluid full-height"
 			  ng-controller="WeekGoalController"
 			  ng-init="init()"
@@ -49,12 +64,18 @@
 						<div class="big-bold-text">Skip</div>
 					</div>
 					<div class="col-md-10" style="padding-right:5px;">
-						<div class="shadow-z-1 matrix-box-half bg-skip-color"></div>
+						<div class="shadow-z-1 matrix-box-half padding bg-skip-color">
+							<div class="container-fluid full-height">
+								<div class="row">
+									<task ng-repeat="taskInfo in skipTasks" task="taskInfo"></task>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-md-1 matrix-box-half">
 						<button class="btn btn-primary btn-fab btn-raised mdi-content-add"
 						  style="margin-top:100%;"
-						  data-ng-click="openTaskPopup()">
+						  data-ng-click="openTaskPopup(1)">
 						</button>
 					</div>
 				</div>
@@ -64,7 +85,7 @@
 							<div class="modal-header">
 								<h4>Add new task</h4>
 							</div>
-							<div class="modal-body">
+							<div class="modal-body" ng-model="selectedTaskTypeVal">
 								<div class="container-fluid">
 									<div class="row">
 										<div class="col-md-2" style="margin-top:8px;"><p>Description</p></div>
@@ -77,18 +98,7 @@
 										<div class="col-md-2" style="margin-top:8px;"><p>Pomodoros</p></div>
 										<div class="col-md-10">
 											<input type="text" class="form-control empty thirsty" ng-pattern="/^\d+$/" 
-											ng-model="taskPomodoros"/>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-2" style="margin-top:8px;"><p>Task type</p></div>
-										<div class="col-md-10">
-											<select class="select" ng-model="selectedTaskTypeVal">
-												<option value="1">Skips</option>
-												<option value="2">Transfer</option>
-												<option value="3">Optimize</option>
-												<option value="4">Perform</option>
-											</select>
+											ng-model="numberOfPomodoros"/>
 										</div>
 									</div>
 								</div>
@@ -105,11 +115,18 @@
 						<div class="big-bold-text">Transfer</div>
 					</div>
 					<div class="col-md-10" style="padding-right:5px;">
-						<div class="shadow-z-1 matrix-box-half bg-transfer-color"></div>
+						<div class="shadow-z-1 matrix-box-half padding bg-transfer-color">
+							<div class="container-fluid full-height">
+								<div class="row">
+									<task ng-repeat="taskInfo in transferTasks" task="taskInfo"></task>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-md-1">
 						<button class="btn btn-primary btn-fab btn-raised  mdi-content-add"
-						  style="margin-top:100%;">
+						  style="margin-top:100%;"
+						  data-ng-click="openTaskPopup(2)">
 						</button>
 					</div>
 				</div>
@@ -118,11 +135,18 @@
 						<div class="big-bold-text">Optimize</div>
 					</div>
 					<div class="col-md-10" style="padding-right:5px;">
-						<div class="shadow-z-1 matrix-box-half bg-optimize-color"></div>
+						<div class="shadow-z-1 matrix-box-half padding bg-optimize-color">
+							<div class="container-fluid full-height">
+								<div class="row">
+									<task ng-repeat="taskInfo in optimizeTasks" task="taskInfo"></task>	
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-md-1">
 						<button class="btn btn-primary btn-fab btn-raised  mdi-content-add"
-						  style="margin-top:100%;">
+						  style="margin-top:100%;"
+						  data-ng-click="openTaskPopup(3)">
 						</button>
 					</div>
 				</div>
@@ -131,11 +155,18 @@
 						<div class="big-bold-text">Perform</div>
 					</div>
 					<div class="col-md-10" style="padding-right:5px;">
-						<div class="shadow-z-1 matrix-box-half bg-perform-color"></div>
+						<div class="shadow-z-1 matrix-box-half padding bg-perform-color">
+							<div class="container-fluid full-height">
+								<div class="row">
+									<task ng-repeat="taskInfo in performTasks" task="taskInfo"></task>	
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-md-1">
 						<button class="btn btn-primary btn-fab btn-raised  mdi-content-add"
-						  style="margin-top:100%;">
+						  style="margin-top:100%;"
+						  data-ng-click="openTaskPopup(4)">
 						</button>
 					</div>
 				</div>
@@ -211,44 +242,25 @@
 		</div>
 		
 		<!--jquery 2.x - does not support Internet Explorer 6, 7, or 8-->
-		<script type="text/javascript" src="js/jquery-2.1.4.min.js">
-		</script>
-		<script type="text/javascript" src="js/angular-1.4.7.min.js">
-		</script>
-		<script type="text/javascript" src="js/angular-route-1.4.7.min.js">
-		</script>
-		<script type="text/javascript" src="js/angular-animate-1.4.7.min.js">
-		</script>
-		<script type="text/javascript" src="js/bootstrap.min.js">
-		</script>
-		<script type="text/javascript" src="js/material.min.js">
-		</script>
-		<script type="text/javascript" src="js/ripples.min.js">
-		</script>
-		<script type="text/javascript" src="js/global.js">
-		</script>
-		<script type="text/javascript" src="js/angular-ui-bootstrap-modal.js">
-		</script>
-		<script type="text/javascript" src="js/jquery.dropdown.js">
-		</script>
-		<script type="text/javascript" src="js/moment.js">
-		</script>
-		<script type="text/javascript" src="js/db.js">
-		</script>
-		<script type="text/javascript" src="js/shared/shared.pageService.js">
-		</script>
-		<script type="text/javascript" src="js/shared/shared.dbService.js">
-		</script>
-		<script type="text/javascript" src="js/shared/shared.module.js">
-		</script>
-		<script type="text/javascript" src="js/controllers/WeekGoalController.js">
-		</script>
-		<script type="text/javascript" src="js/controllers/InventoryController.js">
-		</script>
-		<script type="text/javascript" src="js/controllers/TaskController.js">
-		</script>
-		<script type="text/javascript" src="js/app.js">
-		</script>
-		
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/angular-1.4.7.min.js"></script>
+		<script type="text/javascript" src="js/angular-route-1.4.7.min.js"></script>
+		<script type="text/javascript" src="js/angular-animate-1.4.7.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/material.min.js"></script>
+		<script type="text/javascript" src="js/ripples.min.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src="js/angular-ui-bootstrap-modal.js"></script>
+		<script type="text/javascript" src="js/jquery.dropdown.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
+		<script type="text/javascript" src="js/db.js"></script>
+		<script type="text/javascript" src="js/directives/taskDirective.js"></script>
+		<script type="text/javascript" src="js/shared/shared.pageService.js"></script>
+		<script type="text/javascript" src="js/shared/shared.dbService.js"></script>
+		<script type="text/javascript" src="js/shared/shared.module.js"></script>
+		<script type="text/javascript" src="js/controllers/WeekGoalController.js"></script>
+		<script type="text/javascript" src="js/controllers/InventoryController.js"></script>
+		<script type="text/javascript" src="js/controllers/TaskController.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
 	</body>
 </html>

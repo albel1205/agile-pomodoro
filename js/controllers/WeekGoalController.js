@@ -18,6 +18,7 @@ function WeekGoalController
 				toDate: sunday.toDate().toUTCString()
 			}).then(function(key){
 				console.log('goalId: ' + key);
+				pageService.setCurrentGoalId(key);
 				pageService.setCurrentPageId(2);
 			});
 		}
