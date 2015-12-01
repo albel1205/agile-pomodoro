@@ -189,11 +189,12 @@
 			</div>
 			
 			<div id="today-todos" class="container-fluid full-height"
-				ng-controller="TaskController"
+				ng-controller="TaskController" ng-init="init()"
 				ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}"
 				style="padding-top:32px;">
 				<div class="row">
-					<div class="col-md-4" style="padding-left:2px;padding-right:2px;">
+					<div class="col-md-1"></div>
+					<div class="col-md-3" style="padding-left:2px;padding-right:2px;">
 						<div class="title-container shadow-z-1">
 							<span class="big-bold-text">Activity Inventory</span>
 						</div>
@@ -203,37 +204,41 @@
 							<span class="big-bold-text">Today Todos</span>
 						</div>
 					</div>
-					<div class="col-md-4"  style="padding-left:2px;padding-right:2px;">
+					<div class="col-md-3"  style="padding-left:2px;padding-right:2px;">
 						<div class="title-container shadow-z-1">
 							<span class="big-bold-text">Urgent & Unscheduled</span>
 						</div>
 					</div>
+					<div class="col-md-1"></div>
 				</div>
 				<div class="row full-height" style="min-height:0px;height:80%;">
-					<div class="col-md-4 full-height"
-					  style="padding-left:2px;padding-right:2px;padding-top:2px;">
+					<div class="col-md-1"></div>
+					<div class="col-md-3 full-height" style="padding-left:2px;padding-right:2px;padding-top:2px;">
 						<div class="content-container shadow-z-1">
-							
+							<div class="container-fluid full-height inventory-container">
+								<task ng-repeat="taskInfo in inventoryActivities" task="taskInfo"></task>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-4 full-height"
 					  style="padding-left:2px;padding-right:2px;padding-top:2px;">
-						<div class="content-container shadow-z-1">
-							
+						<div class="content-container shadow-z-1 todo-container">
+							<task ng-repeat="taskInfo in todoActivities" task="taskInfo"></task>
 						</div>
 					</div>
-					<div class="col-md-4 full-height"
+					<div class="col-md-3 full-height"
 					  style="padding-left:2px;padding-right:2px;padding-top:2px;">
-						<div class="content-container shadow-z-1">
-							
+						<div class="content-container shadow-z-1 urgent-container">
+							<task ng-repeat="taskInfo in urgentActivities" task="taskInfo"></task>
 						</div>
 					</div>
+					<div class="col-md-1"></div>
 				</div>
 				<div class="row">
 					<div class="col-md-2 pull-left no-gutter">
 						<button class="btn btn-primary btn-raised btn-md pull-left"
-						  style="margin-top:32px;margin-left:16px;"
-						ng-click="backToInventory()">
+						  	style="margin-top:32px;margin-left:16px;"
+							ng-click="backToInventory()">
 							<span>Back</span>
 						</button>
 					</div>

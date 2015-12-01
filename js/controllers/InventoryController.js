@@ -60,8 +60,8 @@ function InventoryController
 		}
 		
 		var task = {
-			header: $scope.taskDescription,
-			numberOfPomodoros: $scope.numberOfPomodoros,
+			description: $scope.taskDescription,
+			pomodoros: $scope.numberOfPomodoros,
 			taskType: $scope.selectedTaskTypeVal
 		}
 		
@@ -85,8 +85,8 @@ function InventoryController
 			angular.forEach($scope.skipTasks, function(task){
 				tasks.push({
 					containerId:containerId,
-					description:task.header,
-					pomodoros:task.numberOfPomodoros,
+					description:task.description,
+					pomodoros:task.pomodoros,
 					taskType:taskTypes.skip
 				});
 			});
@@ -94,8 +94,8 @@ function InventoryController
 			angular.forEach($scope.transferTasks, function(task){
 				tasks.push({
 					containerId:containerId,
-					description:task.header,
-					pomodoros:task.numberOfPomodoros,
+					description:task.description,
+					pomodoros:task.pomodoros,
 					taskType:taskTypes.transfer
 				});
 			});
@@ -103,8 +103,8 @@ function InventoryController
 			angular.forEach($scope.performTasks, function(task){
 				tasks.push({
 					containerId:containerId,
-					description:task.header,
-					pomodoros:task.numberOfPomodoros,
+					description:task.description,
+					pomodoros:task.pomodoros,
 					taskType:taskTypes.perform
 				});
 			});
@@ -112,8 +112,8 @@ function InventoryController
 			angular.forEach($scope.optimizeTasks, function(task){
 				tasks.push({
 					containerId:containerId,
-					description:task.header,
-					pomodoros:task.numberOfPomodoros,
+					description:task.description,
+					pomodoros:task.pomodoros,
 					taskType:taskTypes.optimize
 				});
 			});

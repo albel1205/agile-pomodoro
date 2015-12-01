@@ -1,6 +1,8 @@
 function pageService($rootScope,$window){
 	var currentPageId = 1;
 	var goalId = 0;
+	var observeCallbacks = [];
+	
 	$window.rootScopes = $window.rootScopes || [];
 	$window.rootScopes.push($rootScope);
 	
@@ -18,6 +20,9 @@ function pageService($rootScope,$window){
 		setCurrentGoalId: function(id){
 			goalId = id;
 			notifyChanges();
+		},
+		registerObserverCallback: function(callback){
+			observeCallbacks.push(callback);
 		}
 	}
 	
@@ -26,6 +31,10 @@ function pageService($rootScope,$window){
 			if(!scope.$$phase){
 				scope.$apply();
 			}
+		});
+		
+		angular.forEach(observeCallbacks, function(callback){
+			callback(currentPageId);
 		});
 	}
 	

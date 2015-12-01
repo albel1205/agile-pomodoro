@@ -25,9 +25,11 @@ function dbService($q, $rootScope)
 	
 	var service = {
 		addGoal:addGoal,
-		addTaskToContainer: addTaskToContainer,
 		getContainer: getContainer,
-		addTasks: addTasks
+		addTasks: addTasks,
+		getAllActivities:getAllActivities,
+		getAllTodoActivities:getAllTodoActivities,
+		getAllUrgentActivities:getAllUrgentActivities
 	};
 	
 	function addGoal(goal){
@@ -69,17 +71,6 @@ function dbService($q, $rootScope)
 		addDbTask(tasks, function(response){
 			deffered.resolve(response);
 		});
-		return deffered.promise;
-	}
-	
-	function addTaskToContainer(tasks, taskContainerType, goalId){
-		var deffered = $q.defer();
-		getGoalContainerByType(goalId, taskContainerType, function(container){
-			addDbTask(tasks, function(response){
-				deffered.resolve(response);
-			});
-		});
-		
 		return deffered.promise;
 	}
 	
@@ -138,161 +129,77 @@ function dbService($q, $rootScope)
 		});
 	};
 	
-	function getAllActivities(){
+	function getAllActivities(goalId){
 		var deffered = $q.defer();
-		openDb(function(){
-			database.taskContainer
-			.query()
-			.filter(function(){
-				return taskContainer.containerType == taskContainerTypes.ActivityInventory;
-			})
-			.execute()
-			.then(function(results){
-				var containerId = (results[0]).id;
-				database.task.query().filter(function(){
-					return task.containerId == containerId;
-				}).execute().then(function(tasks){
-					database.close();
-					deffered.resolve(results);	
-				});
-			});
-		});
-		return deffered.promise;
-	};
-	
-	function getAllTodoActivities(){
-		var deffered = $q.defer();
-		openDb(function(){
-			database.taskContainer
-			.query()
-			.filter(function(){
-				return taskContainer.containerType == taskContainerTypes.Todo;
-			})
-			.execute()
-			.then(function(results){
-				var containerId = (results[0]).id;
-				database.task.query().filter(function(){
-					return task.containerId == containerId;
-				}).execute().then(function(tasks){
-					database.close();
-					deffered.resolve(results);	
-				});
-			});
-		});
-		return deffered.promise;
-	};
-	
-	function getAllUrgentActivities(){
-		var deffered = $q.defer();
-		openDb(function(){
-			database.taskContainer
-			.query()
-			.filter(function(){
-				return taskContainer.containerType == taskContainerTypes.Urgent;
-			})
-			.execute()
-			.then(function(results){
-				var containerId = (results[0]).id;
-				database.task.query().filter(function(){
-					return task.containerId == containerId;
-				}).execute().then(function(tasks){
-					database.close();//close the database
-					deffered.resolve(results);	
-				});
-			});
-		});
-		return deffered.promise;
-	};
-	
-	function assignTaskToTodo(task){
-		var deffered = $q.defer();
-		openDb(function(){
-			database.taskContainer
-			.query()
-			.filter(function(){
-				return taskContainer.containerType == taskContainerTypes.Todo;
-			})
-			.execute()
-			.then(function(results){
-				var containerId = (results[0]).id;
-				task.containerId = containerId;
-				database.task.update(task).then(function(item){
-					database.close();//close the database
-					deffered.resolve(item.id);
-				});
-			});
-		});
-		return deffered.promise;
-	};
-	
-	function addInterruption(interruption){
-		var deffered = $q.defer();
-		openDb(function(){
-			database.interruption.add(interruption).then(function(item){
-				database.close();//close the database
-				deffered.resolve(item.id);
-			});
-		});
-		return deffered.promise;
-	}
-	
-	function deleteTask(id){
-		var deffered = $q.defer();
-		deleteDbTask(id, function(key){
-			deffered.resolve(key);
-		})
-		return deffered.promise;
-	}
-	
-	//private
-	function deleteDbTask(id, callback){
 		openDb(function(db){
 			database = db;
-			database.task.remove(id).then(function(key){
-				database.close();//close the database
-				callback(key);
+			database.taskContainer
+			.query()
+			.filter(function(taskContainer){
+				return taskContainer.containerType == taskContainerTypes.ActivityInventory
+						&& taskContainer.goalId == goalId;
+			})
+			.execute()
+			.then(function(results){
+				var containerId = (results[0]).id;
+				database.task.query().filter(function(task){
+					return task.containerId == containerId;
+				}).execute().then(function(tasks){
+					database.close();
+					deffered.resolve(tasks);	
+				});
 			});
 		});
-	}
-	
-	function addPackageInventory(goalId){
-		var deffered = $q.defer();
-		
-		addDbTaskContainer({
-			goalId:goalId,
-			containerType: taskContainerTypes.ActivityInventory
-		}, function(container){
-			deffered.resolve(container.id);
-		});
-		
 		return deffered.promise;
-	}
+	};
 	
-	function addPackageTodo(goalId){
+	function getAllTodoActivities(goalId){
 		var deffered = $q.defer();
-		
-		addDbTaskContainer({
-			goalId:goalId,
-			containerType: taskContainerTypes.Todo
-		}, function(container){
-			deffered.resolve(container.id);
+		openDb(function(db){
+			database = db;
+			database.taskContainer
+			.query()
+			.filter(function(taskContainer){
+				return taskContainer.containerType == taskContainerTypes.Todo
+						&& taskContainer.goalId == goalId;
+			})
+			.execute()
+			.then(function(results){
+				var containerId = (results[0]).id;
+				database.task.query().filter(function(task){
+					return task.containerId == containerId;
+				}).execute().then(function(tasks){
+					database.close();
+					deffered.resolve(tasks);	
+				});
+			});
 		});
-		
 		return deffered.promise;
-	}
+	};
 	
-	function addPackageUrgent(goalId){
+	function getAllUrgentActivities(goalId){
 		var deffered = $q.defer();
-		
-		addDbTaskContainer({
-			goalId:goalId,
-			containerType: taskContainerTypes.Urgent
-		}, function(container){
-			deffered.resolve(container.id);
+		openDb(function(db){
+			database = db;
+			database.taskContainer
+			.query()
+			.filter(function(taskContainer){
+				return taskContainer.containerType == taskContainerTypes.Urgent
+						&& taskContainer.goalId == goalId;
+			})
+			.execute()
+			.then(function(results){
+				var containerId = (results[0]).id;
+				database.task.query().filter(function(task){
+					return task.containerId == containerId;
+				}).execute().then(function(tasks){
+					database.close();//close the database
+					deffered.resolve(tasks);	
+				});
+			});
 		});
-		
 		return deffered.promise;
-	}
+	};
 	
 	function addDbTaskContainer(container, callback){
 		openDb(function(db){

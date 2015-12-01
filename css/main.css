@@ -208,6 +208,20 @@ li.border-left-green{
   margin-right: 4px;
 }
 
-.content-container{
-  margin-top: 56px;
+.inventory-container .task-container{
+  width: 100% !important;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.todo-container .task-container{
+  width: 100% !important;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.urgent-container .task-container{
+  width: 100% !important;
+  text-align: left;
+  margin-bottom: 4px;
 }
