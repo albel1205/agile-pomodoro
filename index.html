@@ -235,7 +235,7 @@
 					style="padding-left: 2px; padding-right: 2px; padding-top: 2px;">
 					<div class="content-container shadow-z-1">
 						<div class="container-fluid full-height inventory-container">
-							<todo ng-repeat="todo in inventoryActivities" todo="todo"></todo>
+							<todo ng-repeat="todo in inventoryActivities | orderBy:'-taskType'" todo="todo"></todo>
 						</div>
 					</div>
 				</div>
