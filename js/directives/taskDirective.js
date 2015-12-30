@@ -1,10 +1,12 @@
-function taskDirective(){
+function taskDirective() {
 	return {
-		restrict:'E',
-		replace: true,
-		scope: {
-			task: '='
+		restrict : 'E',
+		replace : true,
+		scope : {
+			task : '=',
+			onDragging : '&',
+			index: '@'
 		},
-		templateUrl:'taskInfo.html'
+		templateUrl : 'taskInfo.html'
 	}
 }

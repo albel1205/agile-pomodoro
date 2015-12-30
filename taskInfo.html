@@ -1,6 +1,10 @@
-<div class="col-md-3 task-container mid-margin-right" taskType="{{task.taskType}}">
+<div class="col-md-3 task-container mid-margin-right"
+	taskType="{{task.taskType}}" data-drag="true"
+	data-jqyoui-options="{revert: 'invalid'}"
+	jqyoui-draggable="{placeholder:true,animate:false,onStart:'onDragging(task)'}">
 	<div class="task-header">{{task.description}}</div>
 	<div class="task-pomodoros">
-		<img src="assets/pomodoro.png" width="30" height="30" ng-repeat="pomodoro in [] | range: task.pomodoros"/>
+		<img src="assets/pomodoro.png" width="30" height="30"
+			ng-repeat="pomodoro in [] | range: task.pomodoros" />
 	</div>
 </div>
