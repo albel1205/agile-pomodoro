@@ -7,6 +7,6 @@ function taskDirective() {
 			onDragging : '&',
 			index: '@'
 		},
-		templateUrl : 'taskInfo.html'
+		templateUrl : 'task.html'
 	}
 }

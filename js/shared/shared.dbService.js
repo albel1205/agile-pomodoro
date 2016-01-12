@@ -58,9 +58,8 @@ function dbService($q, $rootScope)
 	
 	function addDbGoal(goal,callback){
 		openDb(function(db){
-			database = db;
-			database.goal.add(goal).then(function(item){
-				database.close();//close the database
+			db.goal.add(goal).then(function(item){
+				db.close();//close the database
 				callback(item[0]);
 			});
 		});
@@ -85,15 +84,14 @@ function dbService($q, $rootScope)
 	
 	function getGoalContainerByType(goalId, containerType, callback){
 		openDb(function(db){
-			database = db;
-			database.taskContainer
+			db.taskContainer
 			.query()
 			.filter('containerType', containerType)
 			.filter('goalId', goalId)
 			.execute()
 			.then(function(results){
 				var container = (results[0]);
-				database.close();
+				db.close();
 				callback(container);
 			});
 		});
@@ -102,9 +100,8 @@ function dbService($q, $rootScope)
 	//private
 	function addDbTask(task, callback){
 		openDb(function(db){
-			database = db;
-			database.task.add(task).then(function(item){
-				database.close();//close the database
+			db.task.add(task).then(function(item){
+				db.close();//close the database
 				callback(item[0]);
 			});
 		});
@@ -121,9 +118,8 @@ function dbService($q, $rootScope)
 	//private
 	function updateDbTask(task, callback){
 		openDb(function(db){
-			database = db;
-			database.task.update(task).then(function(item){
-				database.close();//close the database
+			db.task.update(task).then(function(item){
+				db.close();//close the database
 				callback(item[0]);
 			});
 		});
@@ -132,8 +128,7 @@ function dbService($q, $rootScope)
 	function getAllActivities(goalId){
 		var deffered = $q.defer();
 		openDb(function(db){
-			database = db;
-			database.taskContainer
+			db.taskContainer
 			.query()
 			.filter(function(taskContainer){
 				return taskContainer.containerType == taskContainerTypes.ActivityInventory
@@ -142,10 +137,10 @@ function dbService($q, $rootScope)
 			.execute()
 			.then(function(results){
 				var containerId = (results[0]).id;
-				database.task.query().filter(function(task){
+				db.task.query().filter(function(task){
 					return task.containerId == containerId;
 				}).execute().then(function(tasks){
-					database.close();
+					db.close();
 					deffered.resolve(tasks);	
 				});
 			});
@@ -156,8 +151,7 @@ function dbService($q, $rootScope)
 	function getAllTodoActivities(goalId){
 		var deffered = $q.defer();
 		openDb(function(db){
-			database = db;
-			database.taskContainer
+			db.taskContainer
 			.query()
 			.filter(function(taskContainer){
 				return taskContainer.containerType == taskContainerTypes.Todo
@@ -166,10 +160,10 @@ function dbService($q, $rootScope)
 			.execute()
 			.then(function(results){
 				var containerId = (results[0]).id;
-				database.task.query().filter(function(task){
+				db.task.query().filter(function(task){
 					return task.containerId == containerId;
 				}).execute().then(function(tasks){
-					database.close();
+					db.close();
 					deffered.resolve(tasks);	
 				});
 			});
@@ -180,8 +174,7 @@ function dbService($q, $rootScope)
 	function getAllUrgentActivities(goalId){
 		var deffered = $q.defer();
 		openDb(function(db){
-			database = db;
-			database.taskContainer
+			db.taskContainer
 			.query()
 			.filter(function(taskContainer){
 				return taskContainer.containerType == taskContainerTypes.Urgent
@@ -190,10 +183,10 @@ function dbService($q, $rootScope)
 			.execute()
 			.then(function(results){
 				var containerId = (results[0]).id;
-				database.task.query().filter(function(task){
+				db.task.query().filter(function(task){
 					return task.containerId == containerId;
 				}).execute().then(function(tasks){
-					database.close();//close the database
+					db.close();//close the database
 					deffered.resolve(tasks);	
 				});
 			});
@@ -203,9 +196,8 @@ function dbService($q, $rootScope)
 	
 	function addDbTaskContainer(container, callback){
 		openDb(function(db){
-			database = db;
-			database.taskContainer.add(container).then(function(newContainer){
-				database.close();
+			db.taskContainer.add(container).then(function(newContainer){
+				db.close();
 				callback(newContainer[0]);
 			});
 		})
@@ -252,7 +244,6 @@ function dbService($q, $rootScope)
 				}
 			}
 		}).then(function(result){
-			//database = result;
 			callback(result);
 		});
 	}

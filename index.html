@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html ng-app="AgilePomodoroApp" ng-csp="">
+
 <head>
-<meta charset="utf-8" />
-<title>Activity Inventory</title>
+  <meta charset="utf-8" />
+  <title>Activity Inventory</title>
 
-<!-- Mobile support -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Mobile support -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--bootstrap libs-->
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/roboto.min.css" />
-<link rel="stylesheet" href="css/material-fullpalette.min.css" />
-<link rel="stylesheet" href="css/ripples.min.css" />
-<link rel="stylesheet" href="css/jquery-ui.min.css" />
-<link rel="stylesheet" href="css/jquery.dropdown.css" />
-<link rel="stylesheet" href="css/main.css" />
-<base target="_blank" />
+  <!--bootstrap libs-->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/roboto.min.css" />
+  <link rel="stylesheet" href="css/material-fullpalette.min.css" B/>
+  <link rel="stylesheet" href="css/ripples.min.css" />
+  <link rel="stylesheet" href="css/jquery-ui.min.css" />
+  <link rel="stylesheet" href="css/jquery.dropdown.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <base target="_blank" />
 </head>
+
 <body>
-	<div class="main-content full-height">
-		<!-- Navigation bar -->
-		<!--<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="main-content full-height">
+    <!-- Navigation bar -->
+    <!--<nav class="navbar navbar-default navbar-fixed-top">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle"
 					style="display:block;margin-top:10px;">
@@ -36,258 +38,225 @@
 				</div>
 			</nav>-->
 
-		<!-- step 1 -->
-		<div id="week-goal" class="container-fluid full-height"
-			ng-controller="WeekGoalController" ng-init="init()"
-			ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
-			<div class="row" style="margin-top: 25%;">
-				<div class="col-md-1"></div>
-				<div class="col-md-9" style="padding-top: 12px;">
-					<input class="form-control empty" ng-model="weekGoal"
-						ng-class="{'ng-invalid': (weekGoal == ''), '':(weekGoal != '')}"
-						placeholder="What would you like to archive this week" type="text">
-				</div>
-				<div class="col-md-2">
-					<button class="btn btn-sub btn-primary btn-raised mdi-content-send"
-						data-ng-click="go()">
-						<span> GO </span>
-					</button>
-				</div>
-			</div>
-		</div>
+    <!-- step 1 -->
+    <div id="week-goal" class="container-fluid full-height" ng-controller="WeekGoalController" ng-init="init()" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}">
+      <div class="row" style="margin-top: 25%;">
+        <div class="col-md-1"></div>
+        <div class="col-md-9" style="padding-top: 12px;">
+          <input class="form-control empty" ng-model="weekGoal" ng-class="{'ng-invalid': (weekGoal == ''), '':(weekGoal != '')}" placeholder="What would you like to archive this week" type="text">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-sub btn-primary btn-raised mdi-content-send" data-ng-click="go()">
+            <span> GO </span>
+          </button>
+        </div>
+      </div>
+    </div>
 
-		<!-- step 2 -->
-		<div id="activity-inventory" class="container-fluid full-height"
-			ng-controller="InventoryController"
-			ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}"
-			style="padding-top: 56px;">
-			<div class="row">
-				<div class="col-md-1" style="margin-top: 4%;">
-					<div class="big-bold-text">Skip</div>
-				</div>
-				<div class="col-md-10" style="padding-right: 5px;">
-					<div class="shadow-z-1 matrix-box-half padding bg-skip-color">
-						<div class="container-fluid full-height" data-drop="true"
-							jqyoui-droppable="{onDrop:'onDropInSkipCallback'}">
-							<div class="row">
-								<task ng-repeat="taskInfo in skipTasks"
-									task="taskInfo" on-Dragging='onDragging(taskInfo)'
-									index="{{$index}}"> </task>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-1 matrix-box-half">
-					<button class="btn btn-primary btn-fab btn-raised mdi-content-add"
-						style="margin-top: 100%;" data-ng-click="openTaskPopup(1)">
-					</button>
-				</div>
-			</div>
-			<div modal="showModal" close="closeTaskPopup()" class="modal"
-				style="display: none;">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4>Add new task</h4>
-						</div>
-						<div class="modal-body" ng-model="selectedTaskTypeVal">
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-md-2" style="margin-top: 8px;">
-										<p>Description</p>
-									</div>
-									<div class="col-md-10">
-										<input type="text" class="form-control empty full-width"
-											ng-model="taskDescription" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-2" style="margin-top: 8px;">
-										<p>Pomodoros</p>
-									</div>
-									<div class="col-md-10">
-										<input type="text" class="form-control empty thirsty"
-											ng-pattern="/^\d+$/" ng-model="numberOfPomodoros" />
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-primary" data-ng-click="addTask()">OK</button>
-							<button class="btn" data-ng-click="closeTaskPopup()"
-								style="margin-top: 0;">Cancel</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-1" style="margin-top: 4%;">
-					<div class="big-bold-text">Transfer</div>
-				</div>
-				<div class="col-md-10" style="padding-right: 5px;">
-					<div class="shadow-z-1 matrix-box-half padding bg-transfer-color">
-						<div class="container-fluid full-height" data-drop="true"
-							jqyoui-droppable="{onDrop:'onDropInTransferCallback'}">
-							<div class="row">
-								<task ng-repeat="taskInfo in transferTasks" 
-									task="taskInfo"
-									index="{{$index}}"
-									on-Dragging='onDragging(taskInfo)'> </task>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-1">
-					<button class="btn btn-primary btn-fab btn-raised  mdi-content-add"
-						style="margin-top: 100%;" data-ng-click="openTaskPopup(2)">
-					</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-1" style="margin-top: 4%;">
-					<div class="big-bold-text">Optimize</div>
-				</div>
-				<div class="col-md-10" style="padding-right: 5px;">
-					<div class="shadow-z-1 matrix-box-half padding bg-optimize-color">
-						<div class="container-fluid full-height" data-drop="true"
-							jqyoui-droppable="{onDrop:'onDropInOptimizeCallback'}">
-							<div class="row">
-								<task ng-repeat="taskInfo in optimizeTasks" task="taskInfo"
-								index="{{$index}}"
-									on-Dragging='onDragging(taskInfo)'> </task>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-1">
-					<button class="btn btn-primary btn-fab btn-raised  mdi-content-add"
-						style="margin-top: 100%;" data-ng-click="openTaskPopup(3)">
-					</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-1" style="margin-top: 4%;">
-					<div class="big-bold-text">Perform</div>
-				</div>
-				<div class="col-md-10" style="padding-right: 5px;">
-					<div class="shadow-z-1 matrix-box-half padding bg-perform-color">
-						<div class="container-fluid full-height" data-drop="true"
-							jqyoui-droppable="{onDrop:'onDropInPerformCallback'}">
-							<div class="row">
-								<task ng-repeat="taskInfo in performTasks" task="taskInfo"
-								index="{{$index}}"
-									on-Dragging='onDragging(taskInfo)'> </task>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-1">
-					<button class="btn btn-primary btn-fab btn-raised  mdi-content-add"
-						style="margin-top: 100%;" data-ng-click="openTaskPopup(4)">
-					</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2 pull-left no-gutter">
-					<button class="btn btn-primary btn-raised btn-md pull-left"
-						data-ng-click="backToWeekGoal()"
-						style="margin-top: 56px; margin-left: 16px;">
-						<span>Back</span>
-					</button>
-				</div>
-				<div class="col-md-2 pull-right no-gutter">
-					<button class="btn btn-primary btn-raised btn-md pull-right"
-						data-ng-click="goToToDoPage()"
-						style="margin-top: 56px; margin-right: 16px;">
-						<span>To-do page</span>
-					</button>
-				</div>
-			</div>
-		</div>
+    <!-- step 2 -->
+    <div id="activity-inventory" class="container-fluid full-height" ng-controller="InventoryController" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}" style="padding-top: 56px;">
+      <!--Add new task popup-->
+      <div modal="showModal" close="closeTaskPopup()" class="modal" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4>Add new task</h4>
+            </div>
+            <div class="modal-body" ng-model="selectedTaskTypeVal">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-2" style="margin-top: 8px;">
+                    <p>Description</p>
+                  </div>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control empty full-width" ng-model="taskDescription" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2" style="margin-top: 8px;">
+                    <p>Pomodoros</p>
+                  </div>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control empty thirsty" ng-pattern="/^\d+$/" ng-model="numberOfPomodoros" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-ng-click="addTask()">OK</button>
+              <button class="btn" data-ng-click="closeTaskPopup()" style="margin-top: 0;">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1" style="margin-top: 4%;">
+          <div class="big-bold-text">Skip</div>
+        </div>
+        <div class="col-md-10" style="padding-right: 5px;">
+          <div class="shadow-z-1 matrix-box-half padding bg-skip-color">
+            <div class="container-fluid full-height" data-drop="true" jqyoui-droppable="{onDrop:'onDropInSkipCallback'}">
+              <div class="row">
+                <task ng-repeat="taskInfo in skipTasks" task="taskInfo" on-Dragging='onDragging(taskInfo)' index="{{$index}}"> </task>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1 matrix-box-half">
+          <button class="btn btn-primary btn-fab btn-raised mdi-content-add" style="margin-top: 100%;" data-ng-click="openTaskPopup(1)">
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1" style="margin-top: 4%;">
+          <div class="big-bold-text">Transfer</div>
+        </div>
+        <div class="col-md-10" style="padding-right: 5px;">
+          <div class="shadow-z-1 matrix-box-half padding bg-transfer-color">
+            <div class="container-fluid full-height" data-drop="true" jqyoui-droppable="{onDrop:'onDropInTransferCallback'}">
+              <div class="row">
+                <task ng-repeat="taskInfo in transferTasks" task="taskInfo" index="{{$index}}" on-Dragging='onDragging(taskInfo)'> </task>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-primary btn-fab btn-raised  mdi-content-add" style="margin-top: 100%;" data-ng-click="openTaskPopup(2)">
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1" style="margin-top: 4%;">
+          <div class="big-bold-text">Optimize</div>
+        </div>
+        <div class="col-md-10" style="padding-right: 5px;">
+          <div class="shadow-z-1 matrix-box-half padding bg-optimize-color">
+            <div class="container-fluid full-height" data-drop="true" jqyoui-droppable="{onDrop:'onDropInOptimizeCallback'}">
+              <div class="row">
+                <task ng-repeat="taskInfo in optimizeTasks" task="taskInfo" index="{{$index}}" on-Dragging='onDragging(taskInfo)'> </task>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-primary btn-fab btn-raised  mdi-content-add" style="margin-top: 100%;" data-ng-click="openTaskPopup(3)">
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1" style="margin-top: 4%;">
+          <div class="big-bold-text">Perform</div>
+        </div>
+        <div class="col-md-10" style="padding-right: 5px;">
+          <div class="shadow-z-1 matrix-box-half padding bg-perform-color">
+            <div class="container-fluid full-height" data-drop="true" jqyoui-droppable="{onDrop:'onDropInPerformCallback'}">
+              <div class="row">
+                <task ng-repeat="taskInfo in performTasks" task="taskInfo" index="{{$index}}" on-Dragging='onDragging(taskInfo)'> </task>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-primary btn-fab btn-raised  mdi-content-add" style="margin-top: 100%;" data-ng-click="openTaskPopup(4)">
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 pull-left no-gutter">
+          <button class="btn btn-primary btn-raised btn-md pull-left" data-ng-click="backToWeekGoal()" style="margin-top: 56px; margin-left: 16px;">
+            <span>Back</span>
+          </button>
+        </div>
+        <div class="col-md-2 pull-right no-gutter">
+          <button class="btn btn-primary btn-raised btn-md pull-right" data-ng-click="goToToDoPage()" style="margin-top: 56px; margin-right: 16px;">
+            <span>To-do page</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
-		<!-- step 3 -->
-		<div id="today-todos" class="container-fluid full-height"
-			ng-controller="TaskController" ng-init="init()"
-			ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}"
-			style="padding-top: 32px;">
-			<div class="row">
-				<div class="col-md-1"></div>
-				<div class="col-md-3" style="padding-left: 2px; padding-right: 2px;">
-					<div class="title-container shadow-z-1">
-						<span class="big-bold-text">Activity Inventory</span>
-					</div>
-				</div>
-				<div class="col-md-4" style="padding-left: 2px; padding-right: 2px;">
-					<div class="title-container shadow-z-1">
-						<span class="big-bold-text">Today Todos</span>
-					</div>
-				</div>
-				<div class="col-md-3" style="padding-left: 2px; padding-right: 2px;">
-					<div class="title-container shadow-z-1">
-						<span class="big-bold-text">Urgent & Unscheduled</span>
-					</div>
-				</div>
-				<div class="col-md-1"></div>
-			</div>
-			<div class="row full-height" style="min-height: 0px; height: 80%;">
-				<div class="col-md-1"></div>
-				<div class="col-md-3 full-height"
-					style="padding-left: 2px; padding-right: 2px; padding-top: 2px;">
-					<div class="content-container shadow-z-1">
-						<div class="container-fluid full-height inventory-container">
-							<todo ng-repeat="todo in inventoryActivities | orderBy:'-taskType'" todo="todo"></todo>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 full-height"
-					style="padding-left: 2px; padding-right: 2px; padding-top: 2px;">
-					<div class="content-container shadow-z-1 todo-container">
-						<todo ng-repeat="todo in todoActivities" todo="todo"></todo>
-					</div>
-				</div>
-				<div class="col-md-3 full-height"
-					style="padding-left: 2px; padding-right: 2px; padding-top: 2px;">
-					<div class="content-container shadow-z-1 urgent-container">
-						<todo ng-repeat="todo in urgentActivities" todo="todo"></todo>
-					</div>
-				</div>
-				<div class="col-md-1"></div>
-			</div>
-			<div class="row">
-				<div class="col-md-2 pull-left no-gutter">
-					<button class="btn btn-primary btn-raised btn-md pull-left"
-						style="margin-top: 32px; margin-left: 16px;"
-						ng-click="backToInventory()">
-						<span>Back</span>
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- step 3 -->
+    <div id="today-todos" class="container-fluid full-height" ng-controller="TaskController" ng-init="init()" ng-class="{'hidden' : !isCurrentPage(), '': isCurrentPage()}" style="padding-top: 32px;">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <!--Activity Inventory headers-->
+        <div class="col-md-3" style="padding-left: 2px; padding-right: 2px;">
+          <div class="title-container shadow-z-1">
+            <span class="big-bold-text">Activity Inventory</span>
+          </div>
+        </div>
+        <!--Today Todos headers-->
+        <div class="col-md-4" style="padding-left: 2px; padding-right: 2px;">
+          <div class="title-container shadow-z-1">
+            <span class="big-bold-text">Today Todos</span>
+          </div>
+        </div>
+        <!--Urgent & Unscheduled headers-->
+        <div class="col-md-3" style="padding-left: 2px; padding-right: 2px;">
+          <div class="title-container shadow-z-1">
+            <span class="big-bold-text">Urgent & Unscheduled</span>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+      <div class="row full-height" style="min-height: 0px; height: 80%;">
+        <div class="col-md-1"></div>
+        <!--Activity Inventory container-->
+        <div class="col-md-3 full-height" style="padding-left: 2px; padding-right: 2px; padding-top: 2px;">
+          <div class="content-container shadow-z-1">
+            <div class="container-fluid full-height inventory-container">
+              <todo ng-repeat="todo in inventoryActivities | orderBy:'-taskType'" todo="todo"></todo>
+            </div>
+          </div>
+        </div>
+        <!--Today todos container-->
+        <div class="col-md-4 full-height" style="padding-left: 2px; padding-right: 2px; padding-top: 2px;">
+          <div class="content-container shadow-z-1 todo-container">
+            <todo ng-repeat="todo in todoActivities" todo="todo"></todo>
+          </div>
+        </div>
+        <!--Urgent & Unscheduled container-->
+        <div class="col-md-3 full-height" style="padding-left: 2px; padding-right: 2px; padding-top: 2px;">
+          <div class="content-container shadow-z-1 urgent-container">
+            <todo ng-repeat="todo in urgentActivities" todo="todo"></todo>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 pull-left no-gutter">
+          <button class="btn btn-primary btn-raised btn-md pull-left" style="margin-top: 32px; margin-left: 16px;" ng-click="backToInventory()">
+            <span>Back</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<!--jquery 2.x - does not support Internet Explorer 6, 7, or 8-->
-	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="js/angular-1.4.7.min.js"></script>
-	<script type="text/javascript" src="js/angular-route-1.4.7.min.js"></script>
-	<script type="text/javascript" src="js/angular-animate-1.4.7.min.js"></script>
-	<script type="text/javascript" src="js/angular-dragdrop.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/material.min.js"></script>
-	<script type="text/javascript" src="js/ripples.min.js"></script>
-	<script type="text/javascript" src="js/global.js"></script>
-	<script type="text/javascript" src="js/angular-ui-bootstrap-modal.js"></script>
-	<script type="text/javascript" src="js/jquery.dropdown.js"></script>
-	<script type="text/javascript" src="js/moment.js"></script>
-	<script type="text/javascript" src="js/db.js"></script>
-	<script type="text/javascript" src="js/directives/taskDirective.js"></script>
-	<script type="text/javascript" src="js/directives/todoDirective.js"></script>
-	<script type="text/javascript" src="js/shared/shared.pageService.js"></script>
-	<script type="text/javascript" src="js/shared/shared.dbService.js"></script>
-	<script type="text/javascript" src="js/shared/shared.module.js"></script>
-	<script type="text/javascript" src="js/controllers/WeekGoalController.js"></script>
-	<script type="text/javascript" src="js/controllers/InventoryController.js"></script>
-	<script type="text/javascript" src="js/controllers/TaskController.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+  <!--jquery 2.x - does not support Internet Explorer 6, 7, or 8-->
+  <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/angular-1.4.7.min.js"></script>
+  <script type="text/javascript" src="js/angular-route-1.4.7.min.js"></script>
+  <script type="text/javascript" src="js/angular-animate-1.4.7.min.js"></script>
+  <script type="text/javascript" src="js/angular-dragdrop.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/material.min.js"></script>
+  <script type="text/javascript" src="js/ripples.min.js"></script>
+  <script type="text/javascript" src="js/global.js"></script>
+  <script type="text/javascript" src="js/angular-ui-bootstrap-modal.js"></script>
+  <script type="text/javascript" src="js/jquery.dropdown.js"></script>
+  <script type="text/javascript" src="js/moment.js"></script>
+  <script type="text/javascript" src="js/db.js"></script>
+  <script type="text/javascript" src="js/directives/taskDirective.js"></script>
+  <script type="text/javascript" src="js/directives/todoDirective.js"></script>
+  <script type="text/javascript" src="js/shared/shared.pageService.js"></script>
+  <script type="text/javascript" src="js/shared/shared.dbService.js"></script>
+  <script type="text/javascript" src="js/shared/shared.module.js"></script>
+  <script type="text/javascript" src="js/controllers/WeekGoalController.js"></script>
+  <script type="text/javascript" src="js/controllers/InventoryController.js"></script>
+  <script type="text/javascript" src="js/controllers/TaskController.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
 </body>
+
 </html>

@@ -20,4 +20,3 @@ AgilePomodoroApp.filter('range', function(){
         return input;  
     };
 });
-
